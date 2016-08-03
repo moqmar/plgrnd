@@ -1,0 +1,45 @@
+<style>
+  @import 'https://fonts.googleapis.com/css?family=Bungee+Inline|Fira+Mono';
+  body { padding: 50px; }
+  h1 { font-family: Bungee Inline, sans-serif; font-weight: normal; font-size: 4em; margin: 0; color: #86BAAA; text-align: center; position: relative; }
+  h1:before, h1:after { content: ""; border-radius: 2px; display: block; position: absolute; top: 0.45em; left: 0; right: 0; height: 1px; border: 6px solid #86BAAA; }
+  h1:before { left: calc(50% + 4.2em); }
+  h1:after { right: calc(50% + 4.2em); }
+  h2 { color: #86BAAA; font-size: 2em; margin: 50px 0 0; }
+  p { font-size: 1.2em; line-height: 125%; color: #333; }
+  a { color: #86BAAA; cursor: pointer; font-weight: bold; text-decoration: underline; }
+  code { display: block; font-family: Fira Mono, monospace; padding: 25px; margin: 25px 0; border-left: 6px solid #86BAAA; background: #ebebeb; }
+  code a { color: inherit; text-decoration: none; }
+  kbd, .button { display: inline-block; position: relative; font-family: Fira Mono; color: #fff; font-size: 0.9em; padding: 0.2em 0.4em 0; border-radius: 3px; border-bottom: 2px solid rgba(0,0,0,0.15); background: #86BAAA; font-weight: bold; }
+  .button { padding: 0.5em 1em 0.4em; font: inherit; text-decoration: none; }
+  .button:hover { opacity: 0.8; }
+</style>
+
+<h1>Hello World!</h1>
+<p>
+  Welcome to the interactive <a href="https://plgrnd.io/">plgrnd.io</a> HTML playground - just write your code and watch it update in real-time!
+</p>
+
+<h2>Using GitHub Gists</h2>
+<p>
+  You can load <a href="https://gist.github.com/" target="_blank">Gists</a> into Plgrnd by their hash like that:
+  <code><a href="https://plgrnd.io/#0054409c8e9f0270dab76f8fde977b4c" target="_blank">https://plgrnd.io/#0054409c8e9f0270dab76f8fde977b4c</a></code>
+  You can even <strong>create a public Gist</strong> from right here, just by pressing <kbd>Ctrl+Enter</kbd>. Pay attention to the changing URL! <img src="https://cdn.rawgit.com/Ranks/emojione/master/assets/svg/1f600.svg" style="height: 1.1em; vertical-align: bottom; position: relative; top: -2px;">
+</p>
+
+<h2>About</h2>
+<p>
+  I'm <a href="https://mo-mar.de/">Moritz</a>, a web developer. And I like to quickly try out new things, so I made this.
+  Sure, there are a few similar projects, but they all had some sort of problem - no live preview, everything is unnecessarily stored on a server for online collaboration (<a href="https://codr.io/">which is pretty awesome if you need it</a>), or just plain ugly frameset stuff.
+</p><p>
+  So, here it is: <strong>Plgrnd</strong>. It's simple, and fast. Everything "just works" and is a single page without clutter - exactly how I like it.
+</p><p>
+  <a class="button" href="https://github.com/moqmar/plgrnd" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" style="height: 1.1em; position: relative; margin: -4px 4px -4px -5px"><path d="M512 0C229.25 0 0 229.25 0 512c0 226.25 146.688 418.125 350.156 485.812 25.594 4.688 34.938-11.125 34.938-24.625 0-12.188-0.469-52.562-0.719-95.312C242 908.812 211.906 817.5 211.906 817.5c-23.312-59.125-56.844-74.875-56.844-74.875-46.531-31.75 3.53-31.125 3.53-31.125 51.406 3.562 78.47 52.75 78.47 52.75 45.688 78.25 119.875 55.625 149 42.5 4.654-33 17.904-55.625 32.5-68.375C304.906 725.438 185.344 681.5 185.344 485.312c0-55.938 19.969-101.562 52.656-137.406-5.219-13-22.844-65.094 5.062-135.562 0 0 42.938-13.75 140.812 52.5 40.812-11.406 84.594-17.031 128.125-17.219 43.5 0.188 87.312 5.875 128.188 17.281 97.688-66.312 140.688-52.5 140.688-52.5 28 70.531 10.375 122.562 5.125 135.5 32.812 35.844 52.625 81.469 52.625 137.406 0 196.688-119.75 240-233.812 252.688 18.438 15.875 34.75 47 34.75 94.75 0 68.438-0.688 123.625-0.688 140.5 0 13.625 9.312 29.562 35.25 24.562C877.438 930 1024 738.125 1024 512 1024 229.25 794.75 0 512 0z" fill="#fff"/></svg>
+    Source
+  </a>
+  <a class="button" href="https://paypal.me/moqmar" target="_blank">
+    <svg viewBox="0 0 60 60" style="height: 1.5em; position: relative; margin: -9px 0 -9px -10px;" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1"><g transform="translate(-801.000000, 0.000000)"/><g fill="#ffffff" transform="translate(15.000000, 13.000000)"><path d="M29.6345892,8.92307692 C29.60164,12.556406 28.0000232,15.5315784 24.860539,17.7546703 C21.7848043,19.9328722 17.4820707,21.0399291 12.0712418,21.0447634 L10.8528382,21.0447634 C10.4366757,21.0447634 9.96034514,21.4073366 9.87224189,21.791319 L8.40170549,27.9005053 C8.08940454,29.2292499 6.73275771,30.2734608 5.31451024,30.2734608 L1.23310919,30.2734608 L1.19586229,30.4295399 C0.988855458,31.2893565 1.56689875,32 2.48661074,32 L6.74636716,32 C7.66751173,32 8.58006086,31.3073125 8.78706768,30.4295399 L10.2554552,24.3307128 C10.4510015,23.4778025 11.3614017,22.7719932 12.2846952,22.7719932 L13.5023824,22.7719932 C18.7119348,22.7671589 22.7532238,21.7395228 25.6570497,19.6828693 C28.5565779,17.6296688 30.006342,14.9093337 29.9998954,11.5446541 C30.0041931,10.5584549 29.8759778,9.69173218 29.6345892,8.92307692 Z M17.7826226,13.395019 C16.5584655,14.25878 14.8609038,14.6923077 12.6571476,14.6923077 L11.6611537,14.6923077 C10.7833401,14.6923077 10.229327,14.020274 10.423334,13.1960444 L11.646125,8.11362453 C11.8319345,7.29532463 12.7083819,6.61538462 13.5861955,6.62329089 L14.9148705,6.61538462 C16.4682932,6.61538462 17.6487304,6.87233869 18.4452523,7.38163484 C19.2301611,7.87775386 19.6291052,8.66113436 19.6147596,9.71530493 C19.6379858,11.3011728 19.013611,12.5292815 17.7826226,13.395019 Z M28.0337703,5.04674906 C27.5044347,4.03077149 26.7107895,3.20573006 25.6979606,2.58289776 C24.6471685,1.94456511 23.425184,1.50562334 22.0004904,1.24000368 C20.5672014,0.987770692 18.8932402,0.863767882 16.9721603,0.846153846 L8.08018152,0.852494899 C7.15617213,0.863767882 6.25078619,1.57607948 6.03733286,2.45044021 L0.0420161171,28.090135 C-0.164990638,28.967314 0.413052446,29.6923077 1.33276412,29.6923077 L5.59251903,29.6923077 C6.51366328,29.6923077 7.42621209,28.9856326 7.63321884,28.090135 L9.10160586,21.8681531 C9.29715203,20.9980197 10.207552,20.2779579 11.1308451,20.2779579 L12.3485319,20.2779579 C17.5580825,20.273026 21.5993701,19.2246386 24.5031949,17.1264547 C27.4027221,15.0317936 28.8524856,12.2565261 28.8460391,8.82390286 C28.8524856,7.31543685 28.5874597,6.0542719 28.0337703,5.04674906"/></g></g></svg>
+    Donate
+  </a>
+</p>

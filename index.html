@@ -1,0 +1,87 @@
+<!doctype html>
+<title>HTML Playground</title>
+<meta charset="utf-8">
+<style>
+  @import 'https://fonts.googleapis.com/css?family=Fira+Mono|Fira+Sans';
+  html { width: 100%; height: 100%; font-family: Fira Sans, sans-serif; }
+  body { margin: 0; padding: 0; width: 100%; height: 100%; display: flex; }
+  #editor { width: 50%; box-shadow: 0 0 6px -1px rgba(0,0,0,0.4); border-right: 1px solid #ddd; z-index: 100; font-family: Fira Mono, monospace; font-size: 14px; }
+  #preview { border: none; outline: none; flex-grow: 1; }
+  #preview-wrapper { display: flex; flex-direction: column; width: 50%; }
+  a { position: fixed; top: 10px; right: 50%; margin-right: 11px; z-index: 1000;
+      color: #08f; cursor: pointer; text-decoration: underline; }
+  #link { padding: 10px; background: #fff; box-shadow: 0 0 6px -1px rgba(0,0,0,0.4); border-bottom: 1px solid #ddd; }
+</style>
+
+<div id="editor"></div>
+
+<iframe src="data:," id="preview"></iframe>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.4/ace.js"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/chrome");
+    editor.commands.removeCommands(["gotoline", "find"]);
+    editor.commands.bindKeys({"alt-left": null, "alt-right": null});
+    editor.renderer.setScrollMargin(10, 10);
+
+    editor.getSession().setMode("ace/mode/html");
+    editor.getSession().setUseWrapMode(true);
+    editor.getSession().setTabSize(2);
+    editor.getSession().setUseSoftTabs(true);
+    editor.setValue(atob("PCFkb2N0eXBlIGh0bWw+DQo8bWV0YSBjaGFyc2V0PSJ1dGYtOCI+DQoNCjxzdHlsZT4NCiAgQGltcG9ydCAnaHR0cHM6Ly9jZG5qcy5jbG91ZGZsYXJlLmNvbS9hamF4L2xpYnMvbm9ybWFsaXplLzQuMi4wL25vcm1hbGl6ZS5taW4uY3NzJzsNCiAgQGltcG9ydCAnaHR0cHM6Ly9mb250cy5nb29nbGVhcGlzLmNvbS9jc3M/ZmFtaWx5PUZpcmErU2Fucyc7DQogIGJvZHkgeyBtYXJnaW46IDA7IHBhZGRpbmc6IDI1cHg7IGJhY2tncm91bmQ6ICNmOGY4Zjg7IGZvbnQtZmFtaWx5OiBGaXJhIFNhbnMsIHNhbnMtc2VyaWY7IH0NCiAgLyogLi4uICovDQo8L3N0eWxlPg0KDQo8IS0tIEhlbGxvIFdvcmxkIFBhZ2UgLS0+PHNjcmlwdD5mZXRjaCgiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL21vcW1hci9wbGdybmQvbWFzdGVyL3dlbGNvbWUuaHRtbCIpLnRoZW4oUj0+Ui50ZXh0KCkpLnRoZW4oVD0+ZG9jdW1lbnQud3JpdGUoVCkpPC9zY3JpcHQ+")); // default.html as Base64
+    
+    editor.getSelection().clearSelection();
+    editor.getSelection().moveCursorFileEnd();
+    editor.focus();
+    window.saved = true;
+    window.savedOR = true;
+
+    document.getElementById("preview").addEventListener("load", () =>
+      document.getElementById("preview").contentWindow.postMessage(editor.getValue(), "*"));
+    function update() {
+      if (window.savedOR) delete window.savedOR;
+      else window.saved = false;
+      document.getElementById("preview").contentWindow.location.replace("data:text/html,%3Cscript%3Efunction l(e)%7Bdocument.write(e.data)%3Bwindow.removeEventListener('message'%2Cl)%7Dwindow.addEventListener('message'%2Cl)%3C/script%3E");
+    }
+    editor.getSession().on("change", update);
+    setTimeout(update, 150);
+
+    window.addEventListener("beforeunload", event => { if (window.saved) return; event.preventDefault(); return event.returnValue = "The current document will be lost on navigation."; });
+
+    window.gist = {
+      get: function get(id) {
+        fetch("https://api.github.com/gists/" + id).then(R=>R.json()).then(gist => {
+          editor.setValue(gist.files[Object.keys(gist.files)[0]].content);
+          editor.getSelection().clearSelection();
+          editor.getSelection().moveCursorFileEnd();
+          window.saved = true;
+          window.savedOR = true;
+        })
+      },
+      put: function() {
+        return fetch("https://api.github.com/gists", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            files: { "playground.html": { content: editor.getValue() } },
+            description: "Shared via plgrnd.io",
+            public: true
+          })
+        }).then(R=>R.json()).then(gist => {
+          window.location.hash = "#" + gist.id;
+          window.saved = true;
+          return gist;
+        })
+      }
+    }
+    if (window.location.hash && window.location.hash.length > 1) gist.get(window.location.hash.substr(1));
+    window.addEventListener("keydown", function(event) {
+      event.ctrlKey && !event.shiftKey && !event.altKey && event.which == 13 &&
+      confirm("The current document will be published as a public Gist. Before you continue, please make sure that the document doesn't contain any sensitive data.") &&
+      gist.put().then(gist => alert("Hash of your Gist: " + gist.id + "\nJust copy the URL to link back to this document."));
+    })
+
+</script>
