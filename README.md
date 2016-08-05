@@ -1,10 +1,10 @@
 # Hello World!
-Welcome to the interactive [plgrnd.io](https://plgrnd.io/) HTML playground - just write your code and watch it update in real-time!
+Welcome to the interactive [plgrnd.com](https://plgrnd.com/) HTML playground - just write your code and watch it update in real-time!
 
 ## Using GitHub Gists
 You can load [Gists](https://gist.github.com/) into Plgrnd by their hash like that:
 
-    https://plgrnd.io/#0054409c8e9f0270dab76f8fde977b4c
+    https://plgrnd.com/#0054409c8e9f0270dab76f8fde977b4c
 
 You can even **create a public Gist** from right here, just by pressing `Ctrl+Enter`. Pay attention to the changing URL!
 
