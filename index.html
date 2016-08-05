@@ -37,8 +37,9 @@
     window.saved = true;
     window.savedOR = true;
 
-    document.getElementById("preview").addEventListener("load", () =>
-      document.getElementById("preview").contentWindow.postMessage(editor.getValue(), "*"));
+    document.getElementById("preview").addEventListener("load", function() {
+      document.getElementById("preview").contentWindow.postMessage(editor.getValue(), "*")
+    });
     function update() {
       if (window.savedOR) delete window.savedOR;
       else window.saved = false;
@@ -47,11 +48,14 @@
     editor.getSession().on("change", update);
     setTimeout(update, 150);
 
-    window.addEventListener("beforeunload", event => { if (window.saved) return; event.preventDefault(); return event.returnValue = "The current document will be lost on navigation."; });
+    window.addEventListener("beforeunload", function(event) {
+      if (window.saved) return; event.preventDefault(); return event.returnValue = "The current document will be lost on navigation.";
+    });
 
+    window.fetch.json = function(R){return R.json()};
     window.gist = {
       get: function get(id) {
-        fetch("https://api.github.com/gists/" + id).then(R=>R.json()).then(gist => {
+        fetch("https://api.github.com/gists/" + id).then(fetch.json).then(function(gist) {
           editor.setValue(gist.files[Object.keys(gist.files)[0]].content);
           editor.getSelection().clearSelection();
           editor.getSelection().moveCursorFileEnd();
@@ -67,10 +71,10 @@
           },
           body: JSON.stringify({
             files: { "playground.html": { content: editor.getValue() } },
-            description: "Shared via plgrnd.io",
+            description: "Shared via plgrnd.com",
             public: true
           })
-        }).then(R=>R.json()).then(gist => {
+        }).then(fetch.json).then(function(gist) {
           window.location.hash = "#" + gist.id;
           window.saved = true;
           return gist;
@@ -81,7 +85,7 @@
     window.addEventListener("keydown", function(event) {
       event.ctrlKey && !event.shiftKey && !event.altKey && event.which == 13 &&
       confirm("The current document will be published as a public Gist. Before you continue, please make sure that the document doesn't contain any sensitive data.") &&
-      gist.put().then(gist => alert("Hash of your Gist: " + gist.id + "\nJust copy the URL to link back to this document."));
+      gist.put().then(function(gist) { alert("Hash of your Gist: " + gist.id + "\nJust copy the URL to link back to this document.")});
     })
 
 </script>
