@@ -7,15 +7,17 @@
   body { margin: 0; padding: 0; width: 100%; height: 100%; display: flex; }
   #editor { width: 50%; box-shadow: 0 0 6px -1px rgba(0,0,0,0.4); border-right: 1px solid #ddd; z-index: 100; font-family: Fira Mono, monospace; font-size: 14px; }
   #preview { border: none; outline: none; flex-grow: 1; }
-  #preview-wrapper { display: flex; flex-direction: column; width: 50%; }
-  a { position: fixed; top: 10px; right: 50%; margin-right: 11px; z-index: 1000;
-      color: #08f; cursor: pointer; text-decoration: underline; }
+  a { display: none; position: fixed; bottom: 10px; right: 10px; cursor: pointer; width: 48px; height: 48px; z-index: 1000; background: url("data:image/svg+xml,<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M8.67 21.28L19.984 9.966l-4.95-4.949L3.72 16.33l4.95 4.95zm-.708.706l-6.007 1.06 1.06-6.008 4.947 4.948zm12.73-12.727l2.12-2.121c.71-.709 0-1.418 0-1.418l-3.53-3.531s-.71-.709-1.418 0L15.742 4.31l4.95 4.95z' fill='%23fff' fill-rule='evenodd'/></svg>") #333 no-repeat center center / 66.666%; }
   #link { padding: 10px; background: #fff; box-shadow: 0 0 6px -1px rgba(0,0,0,0.4); border-bottom: 1px solid #ddd; }
+  .po #editor { display: none; }
+  .po a { display: block; }
 </style>
 
 <div id="editor"></div>
 
 <iframe src="data:," id="preview"></iframe>
+
+<a onclick="document.body.classList.remove('po')"></a>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.4/ace.js"></script>
 <script>
@@ -81,7 +83,8 @@
         })
       }
     }
-    if (window.location.hash && window.location.hash.length > 1) gist.get(window.location.hash.substr(1));
+    if (window.location.hash && window.location.hash.length > 1) gist.get(window.location.hash.substr(1,32));
+    if (window.location.hash && window.location.hash.match(/[pP]$/)) document.body.classList.add("po"); // Preview only
     window.addEventListener("keydown", function(event) {
       event.ctrlKey && !event.shiftKey && !event.altKey && event.which == 13 &&
       confirm("The current document will be published as a public Gist. Before you continue, please make sure that the document doesn't contain any sensitive data.") &&
